@@ -22,8 +22,8 @@ RUN echo 'PS1="WOPR > "' >> /etc/profile \
     && echo "#!/bin/sh" > /usr/bin/list-games \
     && echo "/usr/bin/apropos -s 6 ." >> /usr/bin/list-games \ 
     && echo "" >> /usr/bin/list-games \ 
-    && echo "Use 'help <game_name>' to see additional information about a game" >> /usr/bin/list-games \ 
-    && echo "Use 'list' to see the list of games" >> /usr/bin/list-games \ 
+    && echo "echo \"Use 'help <game_name>' to see additional information about a game\"" >> /usr/bin/list-games \ 
+    && echo "echo \"Use 'list' to see the list of games\"" >> /usr/bin/list-games \ 
     && echo "" >> /usr/bin/list-games \ 
     && chmod +x /usr/bin/list-games
 
