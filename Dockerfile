@@ -1,7 +1,7 @@
 FROM alpine
 
 # since games use ncurses libary for colors/control, a TERM must be set 
-ENV TERM vt100
+ENV TERM xterm
 ENV HOSTNAME WOPR
 # note: this may need to change on a running container depending on terminal
 
@@ -31,7 +31,7 @@ RUN echo 'PS1="WOPR > "' >> /etc/profile \
 RUN echo "" > /etc/motd \
   && echo "GREETINGS PROFESSOR FALCON!" >> /etc/motd \
   && echo "DO YOU WANT TO PLAY A GAME?" >> /etc/motd \
-  && /usr/bin/apropos -s 6 . >> /etc/motd \
+  && /usr/bin/list-games >> /etc/motd \
   && echo "" >> /etc/motd
 
 # listen for telnet to make games "network aware"
