@@ -1,7 +1,7 @@
 FROM alpine
 
 # since games use ncurses libary for colors/control, a TERM must be set 
-ENV TERM xterm
+ENV TERM vt100
 ENV HOSTNAME WOPR
 # note: this may need to change on a running container depending on terminal
 
