@@ -37,5 +37,8 @@ RUN echo "" > /etc/motd \
   && echo "Use 'list' to see the list of games" >> /etc/motd \ 
   && echo "" >> /etc/motd
 
+# for normal Docker, the port must be specified (unused by RouterOS)
+EXPOSE 23/tcp
+
 # listen for telnet to make games "network aware"
 CMD /usr/sbin/telnetd -p 23 -b 0.0.0.0 -l /bin/login -F 
