@@ -5,17 +5,22 @@ The command-line games come from two collections, [bsdgames](https://wiki.linuxq
 ![](https://i.ibb.co/9nFtwvz/Screenshot-2023-09-03-at-3-41-10-PM.png)
 
 
+> **NOTE** /container on RouterOS needed to be setup first to use this container. See https://help.mikrotik.com/docs/display/ROS/Container 
+
 ### Installing Container
 
 1. Using the [DockerHub image](https://hub.docker.com/r/ammo74/cligames), RouterOS registry-url must be set for DockerHub:
-```
-/container/config/set registry-url=https://registry-1.docker.io
-```
-> To use GHCR, https://ghcr.io must be regitry-url to pull image from GitHub: 
-> ```
-> /container/config/set registry-url=https://ghcr.io
-> ```
-> _Note: This will replace your existing registry such as DockerHub so the GitHub container will load. After install `cligames` you can reset to DockerHub using_  `registry-url=https://registry-1.docker.io`
+  ```
+  /container/config/set registry-url=https://registry-1.docker.io
+  ```
+   
+  > **TIP**  To pull image from GitHub's Container Registry (GHCR) instead of DockerHub, use: 
+  > ```
+  > /container/config/set registry-url=https://ghcr.io
+  > ```
+  > 
+  > **NOTE** Only registry one can be set at a time RouterOS, so setting `registry-url` will override whatever what set previously.  
+ 
 
 2. Create a VETH for use with `cligames` containers: 
 ```
