@@ -19,7 +19,7 @@ The command-line games come from two collections, [bsdgames](https://wiki.linuxq
   > /container/config/set registry-url=https://ghcr.io
   > ```
   > 
-  > **NOTE** Only registry one can be set at a time RouterOS, so setting `registry-url` will override whatever what set previously.  
+  > **NOTE** Only one container registry  can be set at a time RouterOS, so setting `registry-url` will override the previous one.  Existing containers are not effected by changing the registry.  
  
 
 2. Create a VETH for use with `cligames` containers: 
@@ -29,9 +29,11 @@ The command-line games come from two collections, [bsdgames](https://wiki.linuxq
 ```
 3. Create a /container with `cligames`, changing the `root-dir=` as needed:
 ```
-/container/add remote-image=ghcr.io/tikoci/cligames:latest interface=veth-cligames root-dir=disk1/cligamesg1 logging=yes hostname=WOPR
+/container/add remote-image=ammo74/cligames:latest interface=veth-cligames root-dir=disk1/cligamesg1 logging=yes hostname=WOPR
 ```
-> _Note: No mounts or environment varaibles are strickly needed.  However `TERM` can be set in `/container/envs` to control the termcap used by the games, `vt100` or `xterm` would typical.  Other values like `ansi` or `vte` may also work, depending on the game_
+  > **TIP** For ghcr.io, use `ghcr.io/tikoci/cligames:latest` in `remote-image=`.
+  
+  > **NOTE**  No mounts or environment varaibles are strickly needed.  However `TERM` can be set in `/container/envs` to control the termcap used by the games, `vt100` or `xterm` would typical.  Other values like `ansi` or `vte` may also work, depending on the game_
 
 4. Wait a few moments, then start the container:
 ```
