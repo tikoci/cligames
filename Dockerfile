@@ -32,6 +32,7 @@ RUN echo "" > /etc/motd \
   && echo "GREETINGS PROFESSOR FALCON!" >> /etc/motd \
   && echo "DO YOU WANT TO PLAY A GAME?" >> /etc/motd \
   && echo "" >> /etc/motd \
+  && catman 6 \
   && /usr/bin/apropos -s 6 . >> /etc/motd \
   && echo "Use 'help <game_name>' to see additional information about a game" >> /etc/motd \ 
   && echo "Use 'list' to see the list of games" >> /etc/motd \ 
