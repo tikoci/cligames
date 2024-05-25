@@ -8,7 +8,7 @@ ENV HOSTNAME WOPR
 # add hostname & packages, specifically add "bsd-games"
 RUN apk update \
  && apk add --no-cache busybox-extras gawk ncurses mandoc man-db mandoc-apropos \
- && apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing  bsd-games bsd-games-doc nbsdgames nbsdgames-doc 
+ && apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing  bsd-games bsd-games-doc nbsdgames nbsdgames-doc \
  && catman 6 
 
 # add users that map various games in bsd-games games 
