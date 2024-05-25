@@ -7,8 +7,9 @@ ENV HOSTNAME WOPR
 
 # add hostname & packages, specifically add "bsd-games"
 RUN apk update \
- && apk add --no-cache busybox-extras gawk  \
- && apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing ncurses mandoc mandoc-apropos bsd-games bsd-games-doc nbsdgames nbsdgames-doc 
+ && apk add --no-cache busybox-extras gawk ncurses mandoc man-db mandoc-apropos \
+ && apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing  bsd-games bsd-games-doc nbsdgames nbsdgames-doc 
+ && catman 6 
 
 # add users that map various games in bsd-games games 
 RUN adduser -D joshua && echo -e "\n\n" | passwd joshua \
@@ -32,7 +33,6 @@ RUN echo "" > /etc/motd \
   && echo "GREETINGS PROFESSOR FALCON!" >> /etc/motd \
   && echo "DO YOU WANT TO PLAY A GAME?" >> /etc/motd \
   && echo "" >> /etc/motd \
-  && catman 6 \
   && /usr/bin/apropos -s 6 . >> /etc/motd \
   && echo "Use 'help <game_name>' to see additional information about a game" >> /etc/motd \ 
   && echo "Use 'list' to see the list of games" >> /etc/motd \ 
