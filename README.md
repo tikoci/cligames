@@ -41,13 +41,7 @@ The command-line games come from two collections, [bsdgames](https://wiki.linuxq
 >.  
 > **IMPORTANT**
 >
-> Consider limiting access to the container's IP (by suggestion, 172.18.70.1) using RouterOS firewall as needed, specifically `telnet` is exposed.  > Additionally, the `joshua` login can be removed using:
-> ```
-> deluser --remove-home joshua
-> ``` 
-> using RouterOS's `/container/shell [find tag~"cligames]` to access root shell to enter the above command.
->.  
->.  
+> Consider limiting access to the container using RouterOS firewall.  See details below.
 
 
 
@@ -199,7 +193,24 @@ rxvt-256color   rxvt 2.7.9 with xterm 256-colors
 If any game does not draw correctly or has other formmating issue.  You can try another terminal type like `TERM=vte` or `TERM=ansi`...or even `TERM=dumb` to turn off most formatting (although some games do not like "dumb").
 
 
-### Security Note
-By default, the container should be accessible only via the local RouterOS device.  While a `dst-nat` in `/ip/firewall/nat` could be used to map 23/tcp port of `cligames` telnet server at 172.18.70.1 — this would not be advisable without additional protections in `/ip/firewall/filter` so as not expose the container on the internet.
+### Security Considerations
+
+`telnet` is exposed to keep a "retro" feel.  But this is not the most secure approach.  Some considering when using this container.  
+
+- Games launch with the game as the login process, so shell access should not be exposed by the password-less logins.  At some level, this is same as a web server (i.e. unauthenticed access) 
+
+- The "special" `joshua` telnet login provides shell access - so this may require attention.  In most cases, the account should be removed.  To remove the `joshua` login:
+  1. Use `/container/shell [find tag~"cligames"]` to access shell from RouterOS running the cligames container.
+  2. The at the Alpine shell prompt, use  `
+ deluser --remove-home joshua`
+
+- Using a default firewall, the container should be accessible only from the local RouterOS LAN.  It be advisable to consider additional protections in `/ip/firewall/filter` so as not expose the container more broadly.  The specifics depend on your network topology and router config.  
+
+- Stop the container if not using it using:
+  ```
+  /container/stop [find tag~"cligames"]
+  ```
+  To restart it, use:  `/container/start [find tag~"cligames"]`
+   
 
 **Use at your own risk.**
