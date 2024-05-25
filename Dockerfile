@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.19
 
 # since games use ncurses libary for colors/control, a TERM must be set 
 ENV TERM vt100
