@@ -7,10 +7,14 @@ The command-line games come from two collections, [bsdgames](https://wiki.linuxq
 
 ### Installing Container
 
-1. Use https://ghcr.io as regitry-url to pull image from GitHub: 
+1. Using the [DockerHub image](https://hub.docker.com/r/ammo74/cligames), RouterOS registry-url must be set for DockerHub:
 ```
-/container/config/set registry-url=https://ghcr.io
+/container/config/set registry-url=https://registry-1.docker.io
 ```
+> To use GHCR, https://ghcr.io must be regitry-url to pull image from GitHub: 
+> ```
+> /container/config/set registry-url=https://ghcr.io
+> ```
 > _Note: This will replace your existing registry such as DockerHub so the GitHub container will load. After install `cligames` you can reset to DockerHub using_  `registry-url=https://registry-1.docker.io`
 
 2. Create a VETH for use with `cligames` containers: 
@@ -32,7 +36,18 @@ The command-line games come from two collections, [bsdgames](https://wiki.linuxq
 ```
 /system/telnet 172.18.70.1
 ```
-6. Finally, to play a game, type the game name at the telnet `login:` prompt, such as `adventure`, with no password.
+6. Finally, to play a game, type the game name at the telnet `login:` prompt, such as `adventure` or `snake`, with no password.
+
+>.  
+> **IMPORTANT**
+>
+> Consider limiting access to the container's IP (by suggestion, 172.18.70.1) using RouterOS firewall as needed, specifically `telnet` is exposed.  > Additionally, the `joshua` login can be removed using:
+> ```
+> deluser --remove-home joshua
+> ``` 
+> using RouterOS's `/container/shell [find tag~"cligames]` to access root shell to enter the above command.
+>.  
+>.  
 
 
 
